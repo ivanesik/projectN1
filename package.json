@@ -4,14 +4,17 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
+    "serve:p": "vue-cli-service serve --mode=production",
     "build": "vue-cli-service build",
+    "inspect": "vue-cli-service inspect",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "vue": "^2.5.21",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^7.0.0",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "rxjs": "^6.4.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.3.0",

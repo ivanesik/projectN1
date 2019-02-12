@@ -1,0 +1,65 @@
+.carousel {
+    perspective: 200vh;
+    overflow: hidden;
+}
+
+.carousel_item {
+    display: none;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    &.display { display: flex; }
+
+    &.forward {
+        &.show {
+            .carousel_item-left { animation: rotate-b-f 2s forwards; }
+            .carousel_item-right { animation: rotate-t-f 2s forwards; }
+        }
+        &.remove {
+            .carousel_item-left { animation: rotate-f-t 2s forwards; }
+            .carousel_item-right { animation: rotate-f-b 2s forwards; }
+        }
+    }
+    &.reverse {
+        &.show {
+            .carousel_item-left { animation: rotate-t-f 2s forwards; }
+            .carousel_item-right { animation: rotate-b-f 2s forwards; }
+        }
+    
+        &.remove {
+            .carousel_item-left { animation: rotate-f-b 2s forwards; }
+            .carousel_item-right { animation: rotate-f-t 2s forwards; }
+        }
+    }
+}
+
+.carousel_item-left, .carousel_item-right {
+    flex: 1 1;
+    transform-style: preserve-3d;
+    transform: translateZ(-50vh);
+}
+
+.carousel_item_content {
+    height: 100%;
+    transform: translateZ(50vh);
+    backface-visibility: hidden;
+    background-size: cover;
+    background-position: center;
+}
+
+@keyframes rotate-b-f {
+    0% {transform: translateZ(-50vh) rotateX(-90deg);}
+    100% {transform: translateZ(-50vh);}
+}
+@keyframes rotate-t-f {
+    0% {transform: translateZ(-50vh) rotateX(90deg);}
+    100% {transform: translateZ(-50vh);}
+}
+@keyframes rotate-f-b {
+    0% {transform: translateZ(-50vh);}
+    100% {transform: translateZ(-50vh) rotateX(-90deg);}
+}
+@keyframes rotate-f-t {
+    0% {transform: translateZ(-50vh);}
+    100% {transform: translateZ(-50vh) rotateX(90deg);}
+}
