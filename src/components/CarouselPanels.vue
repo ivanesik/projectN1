@@ -4,14 +4,12 @@
         <div class="carousel_item" ref="domItems" v-for="(item, index) of items" :key="index" @animationend="onAnimationEnd($event, index)">
             <div class="carousel_item-left">
                 <div class="carousel_item_content" :style="{ backgroundImage: index % 2 == 0 ? 'url(' + item.backgroundImageUrl + ')' : 'none' }">
-                    <div class="h-100" :style="{ backgroundColor: index % 2 == 0 ? 'transparent' : item.backgroundColor }" @click="prev()">
-					</div>
+                    <div class="h-100" :style="{ backgroundColor: index % 2 == 0 ? 'transparent' : item.backgroundColor }" @click="prev()"></div>
                 </div>
             </div>
             <div class="carousel_item-right">
                 <div class="carousel_item_content" :style="{ backgroundImage: index % 2 == 1 ? 'url(' + item.backgroundImageUrl + ')' : 'none' }">
-                    <div class="h-100" :style="{ backgroundColor: index % 2 == 1 ? 'transparent' : item.backgroundColor }" @click="next()">
-					</div>
+                    <div class="h-100" :style="{ backgroundColor: index % 2 == 1 ? 'transparent' : item.backgroundColor }" @click="next()"></div>
                 </div>
             </div>
         </div>
@@ -24,11 +22,11 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { CarouselItem } from '@/data/model.ts';
+import { AboutItem } from '@/data/model.ts';
 
 @Component
 export default class CarouselPanels extends Vue {
-        @Prop() private items!: CarouselItem[];
+    @Prop() private items!: AboutItem[];
     public 	activeIndex: number = 0;
     public 	isTransition: boolean = false;
 
@@ -39,7 +37,7 @@ export default class CarouselPanels extends Vue {
 // ***************************************************************************************************************
 // -API-----------------------------------------------------------------------------------------------------------
 // ***************************************************************************************************************
-    public 	next() {
+    public next() {
             if (!this.isTransition) {
                 const nextIndex = this.activeIndex + 1 >= (this.$refs.domItems as any[]).length ? 0 : this.activeIndex + 1;
                 this.rotateForward(nextIndex);
@@ -47,7 +45,7 @@ export default class CarouselPanels extends Vue {
             }
         }
 
-    public 	prev() {
+    public prev() {
             if (!this.isTransition) {
                 const prevIndex = this.activeIndex - 1 < 0 ? (this.$refs.domItems as any[]).length - 1 : this.activeIndex - 1;
                 this.rotateBackward(prevIndex);
@@ -55,9 +53,9 @@ export default class CarouselPanels extends Vue {
             }
         }
 
-    public 	selectAt(index: number) {
+    public selectAt(index: number) {
             if (!this.isTransition) {
-                if (index > this.activeIndex
+                if (index > this.activeIndex)
                     this.rotateForward(index);
                 else
                     this.rotateBackward(index);
@@ -68,7 +66,7 @@ export default class CarouselPanels extends Vue {
 // ***************************************************************************************************************
 // -Style-And-Avibility-------------------------------------------------------------------------------------------
 // ***************************************************************************************************************
-    public 	rotateForward(index: number) {
+    public rotateForward(index: number) {
             this.isTransition = true;
             const activeItem = (this.$refs.domItems  as HTMLElement[])[this.activeIndex];
             const item = (this.$refs.domItems  as HTMLElement[])[index];
